@@ -167,6 +167,20 @@
     .stamp-blue { color:var(--accent2); border-color:var(--accent2); }
     .stamp-red { color:var(--red); border-color:var(--red); }
     .stamp-muted { color:var(--muted); border-color:var(--border2); }
+    /* DELIVERABLE PREVIEW */
+    .file-preview { background:var(--surface); border:1px solid var(--border); margin-top:36px; overflow:hidden; }
+    .file-header { background:var(--surface2); border-bottom:1px solid var(--border); padding:16px 28px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .file-tag { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); padding:3px 10px; white-space:nowrap; }
+    .file-desc { font-family:var(--mono); font-size:11px; color:var(--fg2); }
+    .file-body { display:flex; flex-direction:column; }
+    .file-chapter { display:flex; border-bottom:1px solid var(--border); }
+    .file-chapter:last-child { border-bottom:none; }
+    .chapter-num { font-family:var(--display); font-size:40px; color:var(--border2); line-height:1; padding:22px 24px; min-width:80px; text-align:right; border-right:1px solid var(--border); display:flex; align-items:flex-start; justify-content:flex-end; }
+    .chapter-content { padding:20px 24px; flex:1; }
+    .chapter-title { font-family:var(--display); font-size:20px; letter-spacing:1px; color:var(--fg); margin-bottom:10px; }
+    .chapter-items { display:flex; flex-direction:column; gap:4px; }
+    .chapter-items span { font-family:var(--mono); font-size:11px; color:var(--fg); padding-left:18px; position:relative; line-height:1.6; }
+    .chapter-items span::before { content:'—'; position:absolute; left:0; color:var(--accent); }
     /* FOOTER */
     footer { border-top:1px solid var(--border); padding:20px 40px; max-width:960px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
     footer span { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:1px; }
@@ -178,6 +192,8 @@
       .stat-bar { grid-template-columns:1fr 1fr; }
       .contact-box { grid-template-columns:1fr; }
       footer { padding-inline:16px; }
+      .chapter-num { min-width:48px; font-size:28px; padding:18px 12px; }
+      .chapter-content { padding:18px 16px; }
     }
   </style>
 </head>
@@ -188,6 +204,7 @@
   <div class="nav-links">
     <a href="#work">Work</a>
     <a href="#services">Services</a>
+    <a href="#deliverable">Deliverables</a>
     <a href="#about">About</a>
     <a href="#contact" class="nav-cta">Contact</a>
   </div>
@@ -377,6 +394,66 @@
   </div>
 </section>
 
+<!-- DELIVERABLE PREVIEW -->
+<section class="section" id="deliverable">
+  <div class="section-label">What You Receive</div>
+  <h2>Inside a research file.</h2>
+  <p class="section-intro">Not a summary memo. A structured, source-cited package your team can use in discovery, depositions, and demand letters — every finding tied to its primary document.</p>
+  <div class="file-preview">
+    <div class="file-header">
+      <span class="file-tag">Research File</span>
+      <span class="file-desc">Compiled for plaintiff counsel — primary sources attached, findings flagged for deposition prep</span>
+    </div>
+    <div class="file-body">
+      <div class="file-chapter">
+        <div class="chapter-num">01</div>
+        <div class="chapter-content">
+          <div class="chapter-title">Career History & Timeline</div>
+          <div class="chapter-items">
+            <span>Every agency, every departure — employment history with gaps flagged</span>
+            <span>Salary records from Transparent Idaho and direct PRR where needed</span>
+            <span>Official biography cross-checked against documented record</span>
+            <span>Financial disclosure filings where applicable</span>
+          </div>
+        </div>
+      </div>
+      <div class="file-chapter">
+        <div class="chapter-num">02</div>
+        <div class="chapter-content">
+          <div class="chapter-title">Civil Litigation Pull</div>
+          <div class="chapter-items">
+            <span>All prior § 1983 claims — PACER, CourtListener, iCourt, Justia</span>
+            <span>Named personally vs. official capacity — pattern flagged across claims</span>
+            <span>Settlement history, outcomes, and repeat plaintiffs identified</span>
+          </div>
+        </div>
+      </div>
+      <div class="file-chapter">
+        <div class="chapter-num">03</div>
+        <div class="chapter-content">
+          <div class="chapter-title">Public Records Package</div>
+          <div class="chapter-items">
+            <span>Policies, grievance logs, incident reports — obtained via Idaho PRA</span>
+            <span>Jail inspection and certification records, budget resolutions, overtime data</span>
+            <span>Contracts, billing documents, and procurement records</span>
+          </div>
+        </div>
+      </div>
+      <div class="file-chapter">
+        <div class="chapter-num">04</div>
+        <div class="chapter-content">
+          <div class="chapter-title">Findings & Flag Report</div>
+          <div class="chapter-items">
+            <span>Documented contradictions between public statements and the record</span>
+            <span>Pattern evidence for institutional failure — built for jury presentation</span>
+            <span>Every finding cited to its primary source — ready for deposition prep</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="section" id="about">
   <div class="section-label">Background</div>
@@ -448,7 +525,8 @@
       </div>
       <div class="contact-note">
         Idaho-based. Available for cases throughout the state and Pacific Northwest.<br>
-        Response within 24 hours on business days.
+        Response within 24 hours on business days. Initial dossier typically 3–5 days.<br>
+        No retainer to start a conversation — tell me the defendant and the claim.
       </div>
     </div>
   </div>
