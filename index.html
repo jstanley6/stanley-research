@@ -4,19 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Stanley Research Group</title>
-  <meta name="description" content="OSINT and public records research for plaintiff attorneys taking on local governments, sheriff's departments, and county jails.">
+  <meta name="description" content="OSINT and public records research for plaintiff attorneys taking on local governments, sheriff's departments, and county jails. Idaho and Pacific Northwest.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <style>
     :root {
-      --bg: #0b0c0e;
-      --surface: #13151a;
-      --surface2: #1a1d24;
-      --border: #252830;
-      --fg: #dde1ea;
-      --muted: #6b7280;
-      --accent: #c8a84b;
+      --bg: #08090b;
+      --surface: #0f1117;
+      --surface2: #171921;
+      --border: #1f2230;
+      --border2: #2a2f42;
+      --fg: #eef0f5;
+      --fg2: #b8bdd0;
+      --muted: #6b7080;
+      --accent: #d4a843;
       --accent2: #4b7fc8;
       --red: #c84b4b;
+      --green: #3dba78;
       --mono: 'IBM Plex Mono', monospace;
       --serif: 'IBM Plex Serif', Georgia, serif;
       --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
@@ -24,394 +27,157 @@
     }
     @media (prefers-color-scheme: light) {
       :root:not([data-theme="dark"]) {
-        --bg: #f0ede6;
-        --surface: #fff;
-        --surface2: #f5f3ef;
-        --border: #ddd8ce;
-        --fg: #1a1d24;
-        --muted: #6b7280;
+        --bg: #f4f1eb;
+        --surface: #ffffff;
+        --surface2: #eeebe3;
+        --border: #d0cbbe;
+        --border2: #b8b2a4;
+        --fg: #12141a;
+        --fg2: #2a2e3d;
+        --muted: #6b7080;
+        --accent: #b8892a;
         color-scheme: light;
       }
     }
     :root[data-theme="light"] {
-      --bg: #f0ede6;
-      --surface: #fff;
-      --surface2: #f5f3ef;
-      --border: #ddd8ce;
-      --fg: #1a1d24;
-      --muted: #6b7280;
+      --bg: #f4f1eb;
+      --surface: #ffffff;
+      --surface2: #eeebe3;
+      --border: #d0cbbe;
+      --border2: #b8b2a4;
+      --fg: #12141a;
+      --fg2: #2a2e3d;
+      --muted: #6b7080;
+      --accent: #b8892a;
       color-scheme: light;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--bg);
       color: var(--fg);
       font-family: var(--serif);
       font-size: 16px;
       line-height: 1.7;
-      padding-inline: 0;
-      padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
     }
+    /* NAV */
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 40px;
+      padding: 0 40px;
+      height: 56px;
       border-bottom: 1px solid var(--border);
       background: var(--surface);
       position: sticky;
       top: env(safe-area-inset-top, 0px);
       z-index: 100;
     }
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 20px;
-      letter-spacing: 3px;
-      color: var(--accent);
-      text-transform: uppercase;
-    }
-    .nav-tag {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .nav-contact {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--accent);
-      text-decoration: none;
-      border: 1px solid var(--accent);
-      padding: 6px 14px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: background 0.15s;
-    }
-    .nav-contact:hover { background: var(--accent); color: #000; }
-    .hero {
-      padding: 80px 40px 60px;
-      max-width: 900px;
-      margin: 0 auto;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 32px;
-      height: 1px;
-      background: var(--accent);
-    }
-    .hero h1 {
-      font-family: var(--display);
-      font-size: clamp(52px, 8vw, 96px);
-      line-height: 0.95;
-      letter-spacing: 2px;
-      text-wrap: balance;
-      margin-bottom: 32px;
-      color: var(--fg);
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero-sub {
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 600px;
-      line-height: 1.6;
-      font-style: italic;
-      margin-bottom: 40px;
-    }
-    .hero-cta {
-      display: inline-block;
-      background: var(--accent);
-      color: #000;
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 14px 32px;
-      margin-right: 16px;
-    }
-    .hero-cta:hover { opacity: 0.85; }
-    .hero-secondary {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 1px;
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .hero-secondary:hover { color: var(--fg); }
-    .stamp-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-    .stamp {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid;
-    }
-    .stamp-gold { color: var(--accent); border-color: var(--accent); }
-    .stamp-blue { color: var(--accent2); border-color: var(--accent2); }
-    .stamp-red { color: var(--red); border-color: var(--red); }
-    .stamp-muted { color: var(--muted); border-color: var(--border); }
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .section h2 {
-      font-family: var(--display);
-      font-size: clamp(32px, 5vw, 52px);
-      line-height: 1;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-      text-wrap: balance;
-    }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 40px;
-    }
-    .service-card {
-      background: var(--surface);
-      padding: 28px 24px;
-    }
-    .service-num {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-    }
-    .service-card h3 {
-      font-family: var(--display);
-      font-size: 22px;
-      letter-spacing: 1px;
-      color: var(--fg);
-      margin-bottom: 10px;
-    }
-    .service-card p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .case-study {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      padding: 32px;
-      margin-top: 40px;
-    }
-    .case-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .case-study h3 {
-      font-family: var(--display);
-      font-size: 28px;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-    .case-study p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
-    .case-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-    .case-stat-num {
-      font-family: var(--display);
-      font-size: 36px;
-      color: var(--accent);
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-    }
-    .case-stat-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-    .cred-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
-    }
-    .cred {
-      padding: 20px 0;
-      border-top: 2px solid var(--accent);
-    }
-    .cred-title {
-      font-family: var(--display);
-      font-size: 18px;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-    .cred-sub {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-    }
-    .client-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 40px;
-    }
-    .client-row {
-      background: var(--surface);
-      padding: 20px 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-    .client-icon {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--accent);
-      padding-top: 2px;
-      min-width: 28px;
-    }
-    .client-row strong {
-      display: block;
-      font-family: var(--display);
-      font-size: 18px;
-      letter-spacing: 0.5px;
-      margin-bottom: 2px;
-    }
-    .client-row span {
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .contact-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
-    }
-    .contact-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 48px;
-    }
-    .contact-box h2 {
-      font-family: var(--display);
-      font-size: clamp(36px, 5vw, 56px);
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-      text-wrap: balance;
-    }
-    .contact-box p {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 500px;
-      margin-bottom: 32px;
-    }
-    .contact-email-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    .contact-email {
-      font-family: var(--mono);
-      font-size: 18px;
-      color: var(--accent);
-      letter-spacing: 1px;
-      user-select: all;
-      cursor: text;
-    }
-    .copy-btn {
-      display: inline-block;
-      margin-top: 16px;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: none;
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      cursor: pointer;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 20px 40px;
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    footer span {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 1px;
-    }
-    @media (max-width: 600px) {
-      nav { padding: 16px 20px; }
-      .nav-tag { display: none; }
-      .hero, .section, .contact-section { padding-inline: 20px; }
-      .contact-box { padding: 28px 20px; }
-      footer { padding-inline: 20px; }
-      .hero h1 { font-size: 52px; }
+    .nav-logo { font-family:var(--display); font-size:18px; letter-spacing:4px; color:var(--accent); text-transform:uppercase; }
+    .nav-links { display:flex; gap:28px; align-items:center; }
+    .nav-links a { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.15s; }
+    .nav-links a:hover { color:var(--fg); }
+    .nav-cta { color:var(--accent) !important; border:1px solid var(--accent); padding:5px 14px; }
+    .nav-cta:hover { background:var(--accent); color:#000 !important; }
+    /* HERO */
+    .hero { padding:80px 40px 64px; max-width:960px; margin:0 auto; border-bottom:1px solid var(--border); }
+    .hero-eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:24px; display:flex; align-items:center; gap:12px; }
+    .hero-eyebrow::before { content:''; display:inline-block; width:28px; height:1px; background:var(--accent); }
+    .hero h1 { font-family:var(--display); font-size:clamp(60px,10vw,112px); line-height:0.92; letter-spacing:1px; color:var(--fg); margin-bottom:32px; text-wrap:balance; }
+    .hero h1 em { font-style:normal; color:var(--accent); display:block; }
+    .hero-deck { font-size:18px; color:var(--fg2); max-width:580px; line-height:1.65; margin-bottom:36px; }
+    .hero-actions { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+    .btn-primary { display:inline-block; background:var(--accent); color:#000; font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; text-decoration:none; padding:14px 36px; transition:opacity 0.15s; }
+    .btn-primary:hover { opacity:0.85; }
+    .btn-ghost { font-family:var(--mono); font-size:11px; letter-spacing:1px; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--border2); padding-bottom:2px; transition:color 0.15s,border-color 0.15s; }
+    .btn-ghost:hover { color:var(--fg); border-color:var(--fg); }
+    /* STAT BAR */
+    .stat-bar { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .stat-cell { background:var(--surface); padding:28px 32px; }
+    .stat-num { font-family:var(--display); font-size:52px; color:var(--accent); line-height:1; font-variant-numeric:tabular-nums; margin-bottom:6px; }
+    .stat-label { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+    /* SECTIONS */
+    .section { max-width:960px; margin:0 auto; padding:64px 40px; border-bottom:1px solid var(--border); }
+    .section-label { font-family:var(--mono); font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:36px; display:flex; align-items:center; gap:12px; }
+    .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .section h2 { font-family:var(--display); font-size:clamp(36px,5vw,60px); line-height:1; letter-spacing:1px; margin-bottom:16px; text-wrap:balance; }
+    .section-intro { font-size:16px; color:var(--fg2); max-width:620px; margin-bottom:40px; line-height:1.65; }
+    /* LIVE CASE */
+    .live-case { background:var(--surface); border:1px solid var(--border); border-top:4px solid var(--accent); padding:36px; margin-top:40px; }
+    .live-badge { display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--green); margin-bottom:16px; }
+    .live-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .live-case h3 { font-family:var(--display); font-size:32px; letter-spacing:1px; margin-bottom:10px; color:var(--fg); }
+    .live-case p { font-size:14px; color:var(--fg2); margin-bottom:14px; line-height:1.65; }
+    /* TABLE */
+    .table-scroll { overflow-x:auto; margin-top:28px; }
+    .lawsuit-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .lawsuit-table th { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); text-align:left; padding:10px 14px; border-bottom:1px solid var(--border2); background:var(--surface2); }
+    .lawsuit-table td { padding:12px 14px; border-bottom:1px solid var(--border); color:var(--fg2); vertical-align:top; }
+    .lawsuit-table tr:hover td { background:var(--surface2); }
+    .case-name { font-family:var(--mono); font-size:11px; color:var(--fg); }
+    .case-status { font-family:var(--mono); font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border:1px solid; }
+    .status-active { color:var(--green); border-color:var(--green); }
+    .status-pending { color:var(--accent); border-color:var(--accent); }
+    /* FINDINGS */
+    .findings-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:36px; }
+    .finding { background:var(--surface); border:1px solid var(--border); padding:24px; }
+    .finding-flag { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; margin-bottom:12px; display:inline-block; border:1px solid; }
+    .flag-red { color:var(--red); border-color:var(--red); }
+    .flag-gold { color:var(--accent); border-color:var(--accent); }
+    .flag-blue { color:var(--accent2); border-color:var(--accent2); }
+    .finding h4 { font-family:var(--display); font-size:20px; letter-spacing:0.5px; margin-bottom:8px; color:var(--fg); }
+    .finding p { font-size:13px; color:var(--fg2); line-height:1.6; }
+    /* SERVICES */
+    .services { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:36px; }
+    .service-card { background:var(--surface); padding:32px 28px; border-left:3px solid transparent; transition:border-color 0.2s; }
+    .service-card:hover { border-left-color:var(--accent); }
+    .service-num { font-family:var(--mono); font-size:10px; color:var(--accent); letter-spacing:2px; margin-bottom:18px; }
+    .service-card h3 { font-family:var(--display); font-size:24px; letter-spacing:1px; color:var(--fg); margin-bottom:10px; }
+    .service-card p { font-size:13px; color:var(--fg2); line-height:1.65; }
+    .service-delivers { margin-top:16px; padding-top:16px; border-top:1px solid var(--border); }
+    .service-delivers span { display:block; font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:1px; padding:3px 0; }
+    .service-delivers span::before { content:'→ '; color:var(--accent); }
+    /* CREDS */
+    .cred-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:36px; }
+    .cred { background:var(--surface); padding:28px 24px; border-left:3px solid var(--accent); }
+    .cred-title { font-family:var(--display); font-size:20px; letter-spacing:1px; margin-bottom:4px; color:var(--fg); }
+    .cred-sub { font-family:var(--mono); font-size:11px; color:var(--muted); }
+    /* CLIENT LIST */
+    .client-list { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); margin-top:36px; }
+    .client-row { background:var(--surface); padding:22px 28px; display:flex; align-items:flex-start; gap:20px; }
+    .client-arrow { font-family:var(--mono); font-size:14px; color:var(--accent); padding-top:1px; min-width:20px; }
+    .client-row strong { display:block; font-family:var(--display); font-size:20px; letter-spacing:0.5px; margin-bottom:2px; color:var(--fg); }
+    .client-row span { font-size:13px; color:var(--fg2); }
+    /* CONTACT */
+    .contact-wrap { max-width:960px; margin:0 auto; padding:64px 40px 80px; }
+    .contact-box { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); }
+    .contact-left { background:var(--accent); padding:48px 40px; }
+    .contact-left h2 { font-family:var(--display); font-size:clamp(36px,5vw,56px); letter-spacing:1px; color:#000; margin-bottom:12px; text-wrap:balance; line-height:1; }
+    .contact-left p { font-size:14px; color:#3a2e00; max-width:340px; line-height:1.6; }
+    .contact-right { background:var(--surface); padding:48px 40px; display:flex; flex-direction:column; gap:24px; }
+    .contact-field label { display:block; font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+    .contact-value { font-family:var(--mono); font-size:16px; color:var(--accent); letter-spacing:1px; user-select:all; }
+    .copy-btn { font-family:var(--mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); background:none; border:1px solid var(--border2); padding:8px 18px; cursor:pointer; margin-top:10px; transition:color 0.15s,border-color 0.15s; }
+    .copy-btn:hover { color:var(--accent); border-color:var(--accent); }
+    .contact-note { font-family:var(--mono); font-size:10px; color:var(--muted); line-height:1.6; border-top:1px solid var(--border); padding-top:20px; }
+    /* STAMPS */
+    .stamp-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:40px; padding-top:32px; border-top:1px solid var(--border); }
+    .stamp { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:5px 12px; border:1px solid; }
+    .stamp-gold { color:var(--accent); border-color:var(--accent); }
+    .stamp-blue { color:var(--accent2); border-color:var(--accent2); }
+    .stamp-red { color:var(--red); border-color:var(--red); }
+    .stamp-muted { color:var(--muted); border-color:var(--border2); }
+    /* FOOTER */
+    footer { border-top:1px solid var(--border); padding:20px 40px; max-width:960px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+    footer span { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:1px; }
+    @media (max-width:700px) {
+      nav { padding:0 16px; }
+      .nav-links a:not(.nav-cta) { display:none; }
+      .hero,.section,.contact-wrap { padding-inline:16px; }
+      .hero h1 { font-size:56px; }
+      .stat-bar { grid-template-columns:1fr 1fr; }
+      .contact-box { grid-template-columns:1fr; }
+      footer { padding-inline:16px; }
     }
   </style>
 </head>
@@ -419,156 +185,277 @@
 
 <nav>
   <div class="nav-logo">Stanley Research</div>
-  <div class="nav-tag">OSINT · Public Records · Government Accountability</div>
-  <a class="nav-contact" href="#contact">Contact</a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Investigative Research Services</div>
-  <h1>The records<br>they didn't<br>want <span>found.</span></h1>
-  <p class="hero-sub">Open-source intelligence and public records research for plaintiff attorneys taking on local governments, sheriff's departments, and county jails.</p>
-  <a class="hero-cta" href="#contact">Discuss Your Case</a>
-  <a class="hero-secondary" href="#work">See the work ↓</a>
+  <div class="hero-eyebrow">Investigative Research for Plaintiff Counsel</div>
+  <h1>They hid it.<br><em>We found it.</em></h1>
+  <p class="hero-deck">OSINT research, public records, and civil docket analysis for attorneys fighting sheriffs, jails, and county governments. We find what defendants document and then bury.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#contact">Discuss Your Case</a>
+    <a class="btn-ghost" href="#work">See active investigation ↓</a>
+  </div>
   <div class="stamp-row">
     <span class="stamp stamp-gold">§ 1983 Civil Rights</span>
     <span class="stamp stamp-blue">Wrongful Death</span>
-    <span class="stamp stamp-gold">Jail Conditions</span>
+    <span class="stamp stamp-gold">In-Custody Deaths</span>
     <span class="stamp stamp-blue">First Amendment</span>
     <span class="stamp stamp-red">Government Misconduct</span>
     <span class="stamp stamp-muted">Idaho · Pacific Northwest</span>
   </div>
 </section>
 
-<section class="section">
-  <div class="section-label">What I Do</div>
-  <h2>Research that holds up in discovery.</h2>
-  <p style="color:var(--muted); max-width:600px; font-size:15px;">Every finding is sourced, cited, and documented. No speculation. No conjecture. Public records, court filings, and open-source intelligence compiled into a dossier your team can use.</p>
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-num">200+</div>
+    <div class="stat-label">Documents Archived</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">10</div>
+    <div class="stat-label">Civil Cases Tracked</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">50+</div>
+    <div class="stat-label">Records Requests Filed</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">4 yrs</div>
+    <div class="stat-label">Jail Cert. Failures Documented</div>
+  </div>
+</div>
+
+<!-- LIVE INVESTIGATION -->
+<section class="section" id="work">
+  <div class="section-label">Active Investigation — Proof of Work</div>
+  <h2>Kootenai County Sheriff's Office</h2>
+  <p class="section-intro">An ongoing investigation into Sheriff Robert Norris and KCSO — jail conditions, in-custody deaths, budget mismanagement, and documented press retaliation. All findings published with full source documentation at <strong>kootenaicountycorruption.org</strong>.</p>
+
+  <div class="live-case">
+    <div class="live-badge"><span class="live-dot"></span> Active — Updated October 2026</div>
+    <h3>What This Investigation Has Produced</h3>
+    <p>Full career dossier on Sheriff Norris, ten federal civil cases tracked from filing through motion practice, four consecutive years of jail inspection certification failures documented from state records, five years of overtime budget overruns confirmed from budget resolutions, and multiple in-custody deaths with sourced timelines.</p>
+    <p>Every finding is cited to a public record, court filing, or government document. Nothing is secondhand.</p>
+
+    <div class="table-scroll">
+      <table class="lawsuit-table">
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Court / Docket</th>
+            <th>Claims</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="case-name">Borrenpohl v. Norris et al.</span></td>
+            <td>D. Idaho · May 2026</td>
+            <td>1st, 4th, 14th Amendment · $5M demand</td>
+            <td><span class="case-status status-active">Active</span></td>
+          </tr>
+          <tr>
+            <td><span class="case-name">Brewster v. KC Sheriff</span></td>
+            <td>4:2026cv00657 · Oct 2026</td>
+            <td>§ 1983</td>
+            <td><span class="case-status status-active">Just Filed</span></td>
+          </tr>
+          <tr>
+            <td><span class="case-name">Watkins v. KC Sheriff</span></td>
+            <td>1:22-cv-00338</td>
+            <td>Cell conditions · Norris named personally</td>
+            <td><span class="case-status status-pending">MSJ Pending</span></td>
+          </tr>
+          <tr>
+            <td><span class="case-name">Campbell v. KC Jail</span></td>
+            <td>1:25-cv-00536</td>
+            <td>ADA · access denial</td>
+            <td><span class="case-status status-active">Active</span></td>
+          </tr>
+          <tr>
+            <td><span class="case-name">Collinson v. KCSO</span></td>
+            <td>D. Idaho · Oct 2024</td>
+            <td>Defamation · refiled after procedural dismissal</td>
+            <td><span class="case-status status-pending">Refiled</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="findings-grid">
+    <div class="finding">
+      <span class="finding-flag flag-red">Documented Contradiction</span>
+      <h4>Official Record Discrepancy</h4>
+      <p>The KCSO website stated Norris joined as a lateral deputy in 2012. His LASD retirement was publicly recorded as March 2014. A two-year gap in the official account, confirmed through public employment records and press reporting.</p>
+    </div>
+    <div class="finding">
+      <span class="finding-flag flag-red">Pattern of Failure</span>
+      <h4>4 Consecutive ISA Failures</h4>
+      <p>Kootenai County Jail has failed Idaho Sheriff's Association certification for four straight years. Documented through state inspection records, Wolfinger's written responses, and correspondence with the ISA. The jail has operated without valid certification since at least 2022.</p>
+    </div>
+    <div class="finding">
+      <span class="finding-flag flag-gold">Budget Records</span>
+      <h4>5 Years of Overtime Overruns</h4>
+      <p>KCSO overtime has exceeded its approved budget every fiscal year for five consecutive years. Sourced directly from county budget resolutions. Total budget grew 55% between FY2021 and FY2026, confirmed through public financial records.</p>
+    </div>
+    <div class="finding">
+      <span class="finding-flag flag-red">Retaliation — Documented</span>
+      <h4>Deputization Revocations</h4>
+      <p>Sheriff Norris revoked the deputy status of the CDA Police Chief, a Captain who was actively investigating Norris, and the Rathdrum Police Chief. Timeline and basis documented from public statements, press coverage, and official records. Case went nationally covered in February 2025.</p>
+    </div>
+    <div class="finding">
+      <span class="finding-flag flag-blue">In-Custody Deaths</span>
+      <h4>Multiple Deaths — Gap in Reporting</h4>
+      <p>Multiple in-custody deaths documented at Kootenai County Jail from 2024 to 2025. Idaho did not require jails to report deaths to the state during this period, making any official count almost certainly incomplete. Timelines built from coroner records, press reports, and family accounts.</p>
+    </div>
+    <div class="finding">
+      <span class="finding-flag flag-gold">Contract Analysis</span>
+      <h4>Billing vs. Cost Discrepancies</h4>
+      <p>Contract billing records obtained via public records request show discrepancies between what was publicly stated about policing contract costs and what the actual county expenditure records show. Figures documented and sourced to the original contract and county financial records.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label">Services</div>
+  <h2>What you get.</h2>
+  <p class="section-intro">Sourced research files your team can use in discovery, depositions, and demand letters. Not summaries — documented findings with citations to primary sources.</p>
   <div class="services">
     <div class="service-card">
       <div class="service-num">01</div>
       <h3>Defendant Dossiers</h3>
-      <p>Full career history, prior lawsuits, disciplinary records, financial disclosures, and press coverage — every public thread pulled on your defendant before deposition.</p>
+      <p>Career history, salary records, prior civil litigation, disciplinary actions, financial disclosures, and press coverage — every public thread on your defendant before the first deposition.</p>
+      <div class="service-delivers">
+        <span>CourtListener and PACER civil docket pull</span>
+        <span>Transparent Idaho salary and financial records</span>
+        <span>Career timeline with contradictions flagged</span>
+        <span>Prior lawsuit pattern analysis</span>
+      </div>
     </div>
     <div class="service-card">
       <div class="service-num">02</div>
       <h3>Public Records Requests</h3>
-      <p>Idaho Public Records Act filings drafted, tracked, and followed up. Policies, incident reports, grievance logs, medical records, contracts — obtained and organized.</p>
+      <p>Requests drafted, filed, tracked, and followed up under Idaho PRA. Policies, incident reports, grievance logs, inspection records, contracts — obtained and organized.</p>
+      <div class="service-delivers">
+        <span>IPRA-compliant request drafting</span>
+        <span>Statutory deadline tracking</span>
+        <span>Denial challenge and refile strategy</span>
+        <span>Document categorization on receipt</span>
+      </div>
     </div>
     <div class="service-card">
       <div class="service-num">03</div>
       <h3>Pattern Research</h3>
-      <p>Prior incidents, repeat plaintiffs, and institutional patterns across years of records. Turns a single case into a documented systemic failure.</p>
+      <p>Prior incidents, inspection histories, budget overruns, repeat plaintiffs. Turns a single client's case into documented institutional failure — which is what juries respond to.</p>
+      <div class="service-delivers">
+        <span>Multi-year budget and staffing analysis</span>
+        <span>Jail inspection and certification records</span>
+        <span>Parallel case identification</span>
+        <span>Timeline reconstruction from records</span>
+      </div>
     </div>
     <div class="service-card">
       <div class="service-num">04</div>
       <h3>Document Analysis</h3>
-      <p>Budget records, inspection reports, staffing data, and contract filings cross-referenced for contradictions, gaps, and the numbers defendants don't want surfaced.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="work">
-  <div class="section-label">Active Investigation</div>
-  <h2>Proof of work.</h2>
-  <p style="color:var(--muted); max-width:600px; font-size:15px;">The Kootenai County Sheriff investigation is ongoing and public. It demonstrates exactly the kind of research available to your firm.</p>
-  <div class="case-study">
-    <div class="case-label">Case Study — Active</div>
-    <h3>Kootenai County Sheriff's Office</h3>
-    <p>Multi-year investigation into jail conditions, in-custody deaths, budget mismanagement, and press retaliation by Sheriff Robert Norris and KCSO leadership. All findings published at kootenaicountycorruption.org with full source documentation.</p>
-    <p>Research to date includes: CourtListener civil rights docket review, ISA certification failure documentation across four consecutive years, overtime budget overruns, in-custody death timelines, and active § 1983 federal litigation tracking.</p>
-    <div class="case-stats">
-      <div>
-        <div class="case-stat-num">200+</div>
-        <div class="case-stat-label">Documents Archived</div>
-      </div>
-      <div>
-        <div class="case-stat-num">10</div>
-        <div class="case-stat-label">Civil Cases Catalogued</div>
-      </div>
-      <div>
-        <div class="case-stat-num">4</div>
-        <div class="case-stat-label">Named In-Custody Deaths</div>
-      </div>
-      <div>
-        <div class="case-stat-num">4 yrs</div>
-        <div class="case-stat-label">ISA Cert. Failures Documented</div>
+      <p>Budget resolutions, inspection reports, contracts, and public statements cross-referenced. What officials say versus what the records actually show — located and documented.</p>
+      <div class="service-delivers">
+        <span>Statement vs. record comparison</span>
+        <span>Contract and billing reconciliation</span>
+        <span>Flag reports for deposition prep</span>
+        <span>Source-cited finding summaries</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<!-- ABOUT -->
+<section class="section" id="about">
   <div class="section-label">Background</div>
-  <h2>Who is doing this research.</h2>
+  <h2>Who does this work.</h2>
+  <p class="section-intro">Jason Stanley. Army veteran, credentialed press, Idaho public records specialist. Not a PI firm. Not a database scraper. Someone who does the actual work and puts their name on it.</p>
   <div class="cred-grid">
     <div class="cred">
-      <div class="cred-title">U.S. Army Veteran</div>
-      <div class="cred-sub">Service-connected, disciplined under pressure</div>
+      <div class="cred-title">U.S. Army</div>
+      <div class="cred-sub">Veteran · Service-connected</div>
     </div>
     <div class="cred">
       <div class="cred-title">Press Credentials</div>
-      <div class="cred-sub">U.S. Press Association — ID #802085569</div>
+      <div class="cred-sub">U.S. Press Association #802085569</div>
     </div>
     <div class="cred">
       <div class="cred-title">Public Records</div>
-      <div class="cred-sub">Idaho PRA specialist — 50+ active requests filed</div>
+      <div class="cred-sub">50+ Idaho PRA requests filed and tracked</div>
     </div>
     <div class="cred">
-      <div class="cred-title">Court Dockets</div>
-      <div class="cred-sub">PACER, CourtListener, iCourt — Idaho district and federal</div>
+      <div class="cred-title">Court Research</div>
+      <div class="cred-sub">PACER · CourtListener · iCourt · Justia</div>
     </div>
   </div>
-</section>
-
-<section class="section">
-  <div class="section-label">Who I Work With</div>
-  <h2>Your case. My research.</h2>
   <div class="client-list">
     <div class="client-row">
-      <div class="client-icon">→</div>
+      <div class="client-arrow">→</div>
       <div>
         <strong>§ 1983 Civil Rights Attorneys</strong>
-        <span>Plaintiff counsel taking on sheriffs, jails, and county governments in federal court</span>
+        <span>Plaintiff counsel fighting sheriffs, jails, and county governments in the District of Idaho and Ninth Circuit</span>
       </div>
     </div>
     <div class="client-row">
-      <div class="client-icon">→</div>
+      <div class="client-arrow">→</div>
       <div>
         <strong>Wrongful Death Counsel</strong>
-        <span>In-custody death cases where the family deserves the full picture the county won't provide</span>
+        <span>In-custody death cases where the family deserves the full picture the county will not hand over voluntarily</span>
       </div>
     </div>
     <div class="client-row">
-      <div class="client-icon">→</div>
+      <div class="client-arrow">→</div>
       <div>
         <strong>First Amendment Lawyers</strong>
-        <span>Press retaliation, public meeting removal, viewpoint discrimination — I've documented it firsthand</span>
+        <span>Press retaliation, public meeting removal, viewpoint discrimination — all three documented firsthand against this defendant</span>
       </div>
     </div>
     <div class="client-row">
-      <div class="client-icon">→</div>
+      <div class="client-arrow">→</div>
       <div>
         <strong>Jail Conditions Litigation</strong>
-        <span>Medical neglect, ADA violations, overcrowding, staffing failures — inspection records and grievance logs obtained and analyzed</span>
+        <span>Medical neglect, ADA violations, staffing failures, inspection records — four years of KCSO jail documentation already compiled</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="contact-section" id="contact">
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
   <div class="section-label">Contact</div>
   <div class="contact-box">
-    <h2>Start with a conversation.</h2>
-    <p>Describe the case and the defendant. Initial consultation is free. If the research fits what you need, we discuss scope and rate from there.</p>
-    <div class="contact-email-label">Email</div>
-    <div class="contact-email" id="email-addr">jasonstanl3y@gmail.com</div>
-    <br>
-    <button class="copy-btn" id="copy-btn">Copy Email</button>
+    <div class="contact-left">
+      <h2>Start with what you have.</h2>
+      <p>Tell me the defendant and the claim. Initial consultation is free. If the research fits what you need, we discuss scope and rate from there. No retainer to start a conversation.</p>
+    </div>
+    <div class="contact-right">
+      <div class="contact-field">
+        <label>Email</label>
+        <div class="contact-value" id="email-addr">jasonstanl3y@gmail.com</div>
+        <button class="copy-btn" id="copy-btn">Copy Email Address</button>
+      </div>
+      <div class="contact-note">
+        Idaho-based. Available for cases throughout the state and Pacific Northwest.<br>
+        Response within 24 hours on business days.
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 <footer>
-  <span>Stanley Research Group · Idaho</span>
+  <span>Stanley Research Group · Idaho · 2026</span>
   <span>OSINT · Public Records · Government Accountability</span>
 </footer>
 
@@ -577,7 +464,7 @@
     var btn = this;
     navigator.clipboard.writeText('jasonstanl3y@gmail.com').then(function() {
       btn.textContent = 'Copied';
-      setTimeout(function() { btn.textContent = 'Copy Email'; }, 2000);
+      setTimeout(function() { btn.textContent = 'Copy Email Address'; }, 2000);
     }).catch(function() {
       var r = document.createRange();
       r.selectNode(document.getElementById('email-addr'));
