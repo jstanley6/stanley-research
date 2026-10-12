@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Stanley Research Group</title>
+  <meta name="description" content="OSINT and public records research for plaintiff attorneys taking on local governments, sheriff's departments, and county jails.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #0b0c0e;
+      --surface: #13151a;
+      --surface2: #1a1d24;
+      --border: #252830;
+      --fg: #dde1ea;
+      --muted: #6b7280;
+      --accent: #c8a84b;
+      --accent2: #4b7fc8;
+      --red: #c84b4b;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'IBM Plex Serif', Georgia, serif;
+      --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+      color-scheme: dark;
+    }
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f0ede6;
+        --surface: #fff;
+        --surface2: #f5f3ef;
+        --border: #ddd8ce;
+        --fg: #1a1d24;
+        --muted: #6b7280;
+        color-scheme: light;
+      }
+    }
+    :root[data-theme="light"] {
+      --bg: #f0ede6;
+      --surface: #fff;
+      --surface2: #f5f3ef;
+      --border: #ddd8ce;
+      --fg: #1a1d24;
+      --muted: #6b7280;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.7;
+      padding-inline: 0;
+      padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .nav-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .nav-contact {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 6px 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.15s;
+    }
+    .nav-contact:hover { background: var(--accent); color: #000; }
+    .hero {
+      padding: 80px 40px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(52px, 8vw, 96px);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      text-wrap: balance;
+      margin-bottom: 32px;
+      color: var(--fg);
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      margin-right: 16px;
+    }
+    .hero-cta:hover { opacity: 0.85; }
+    .hero-secondary {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .hero-secondary:hover { color: var(--fg); }
+    .stamp-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .stamp {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid;
+    }
+    .stamp-gold { color: var(--accent); border-color: var(--accent); }
+    .stamp-blue { color: var(--accent2); border-color: var(--accent2); }
+    .stamp-red { color: var(--red); border-color: var(--red); }
+    .stamp-muted { color: var(--muted); border-color: var(--border); }
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section h2 {
+      font-family: var(--display);
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      text-wrap: balance;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    .service-card {
+      background: var(--surface);
+      padding: 28px 24px;
+    }
+    .service-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--fg);
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .case-study {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 32px;
+      margin-top: 40px;
+    }
+    .case-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .case-study h3 {
+      font-family: var(--display);
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .case-study p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+    .case-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .case-stat-num {
+      font-family: var(--display);
+      font-size: 36px;
+      color: var(--accent);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .case-stat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .cred {
+      padding: 20px 0;
+      border-top: 2px solid var(--accent);
+    }
+    .cred-title {
+      font-family: var(--display);
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .cred-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .client-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    .client-row {
+      background: var(--surface);
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .client-icon {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      padding-top: 2px;
+      min-width: 28px;
+    }
+    .client-row strong {
+      display: block;
+      font-family: var(--display);
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .client-row span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .contact-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 48px;
+    }
+    .contact-box h2 {
+      font-family: var(--display);
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      text-wrap: balance;
+    }
+    .contact-box p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 32px;
+    }
+    .contact-email-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .contact-email {
+      font-family: var(--mono);
+      font-size: 18px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      user-select: all;
+      cursor: text;
+    }
+    .copy-btn {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer span {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .nav-tag { display: none; }
+      .hero, .section, .contact-section { padding-inline: 20px; }
+      .contact-box { padding: 28px 20px; }
+      footer { padding-inline: 20px; }
+      .hero h1 { font-size: 52px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Stanley Research</div>
+  <div class="nav-tag">OSINT · Public Records · Government Accountability</div>
+  <a class="nav-contact" href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Investigative Research Services</div>
+  <h1>The records<br>they didn't<br>want <span>found.</span></h1>
+  <p class="hero-sub">Open-source intelligence and public records research for plaintiff attorneys taking on local governments, sheriff's departments, and county jails.</p>
+  <a class="hero-cta" href="#contact">Discuss Your Case</a>
+  <a class="hero-secondary" href="#work">See the work ↓</a>
+  <div class="stamp-row">
+    <span class="stamp stamp-gold">§ 1983 Civil Rights</span>
+    <span class="stamp stamp-blue">Wrongful Death</span>
+    <span class="stamp stamp-gold">Jail Conditions</span>
+    <span class="stamp stamp-blue">First Amendment</span>
+    <span class="stamp stamp-red">Government Misconduct</span>
+    <span class="stamp stamp-muted">Idaho · Pacific Northwest</span>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">What I Do</div>
+  <h2>Research that holds up in discovery.</h2>
+  <p style="color:var(--muted); max-width:600px; font-size:15px;">Every finding is sourced, cited, and documented. No speculation. No conjecture. Public records, court filings, and open-source intelligence compiled into a dossier your team can use.</p>
+  <div class="services">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <h3>Defendant Dossiers</h3>
+      <p>Full career history, prior lawsuits, disciplinary records, financial disclosures, and press coverage — every public thread pulled on your defendant before deposition.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <h3>Public Records Requests</h3>
+      <p>Idaho Public Records Act filings drafted, tracked, and followed up. Policies, incident reports, grievance logs, medical records, contracts — obtained and organized.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <h3>Pattern Research</h3>
+      <p>Prior incidents, repeat plaintiffs, and institutional patterns across years of records. Turns a single case into a documented systemic failure.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <h3>Document Analysis</h3>
+      <p>Budget records, inspection reports, staffing data, and contract filings cross-referenced for contradictions, gaps, and the numbers defendants don't want surfaced.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="section-label">Active Investigation</div>
+  <h2>Proof of work.</h2>
+  <p style="color:var(--muted); max-width:600px; font-size:15px;">The Kootenai County Sheriff investigation is ongoing and public. It demonstrates exactly the kind of research available to your firm.</p>
+  <div class="case-study">
+    <div class="case-label">Case Study — Active</div>
+    <h3>Kootenai County Sheriff's Office</h3>
+    <p>Multi-year investigation into jail conditions, in-custody deaths, budget mismanagement, and press retaliation by Sheriff Robert Norris and KCSO leadership. All findings published at kootenaicountycorruption.org with full source documentation.</p>
+    <p>Research to date includes: CourtListener civil rights docket review, ISA certification failure documentation across four consecutive years, overtime budget overruns, in-custody death timelines, and active § 1983 federal litigation tracking.</p>
+    <div class="case-stats">
+      <div>
+        <div class="case-stat-num">200+</div>
+        <div class="case-stat-label">Documents Archived</div>
+      </div>
+      <div>
+        <div class="case-stat-num">10</div>
+        <div class="case-stat-label">Civil Cases Catalogued</div>
+      </div>
+      <div>
+        <div class="case-stat-num">4</div>
+        <div class="case-stat-label">Named In-Custody Deaths</div>
+      </div>
+      <div>
+        <div class="case-stat-num">4 yrs</div>
+        <div class="case-stat-label">ISA Cert. Failures Documented</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Background</div>
+  <h2>Who is doing this research.</h2>
+  <div class="cred-grid">
+    <div class="cred">
+      <div class="cred-title">U.S. Army Veteran</div>
+      <div class="cred-sub">Service-connected, disciplined under pressure</div>
+    </div>
+    <div class="cred">
+      <div class="cred-title">Press Credentials</div>
+      <div class="cred-sub">U.S. Press Association — ID #802085569</div>
+    </div>
+    <div class="cred">
+      <div class="cred-title">Public Records</div>
+      <div class="cred-sub">Idaho PRA specialist — 50+ active requests filed</div>
+    </div>
+    <div class="cred">
+      <div class="cred-title">Court Dockets</div>
+      <div class="cred-sub">PACER, CourtListener, iCourt — Idaho district and federal</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Who I Work With</div>
+  <h2>Your case. My research.</h2>
+  <div class="client-list">
+    <div class="client-row">
+      <div class="client-icon">→</div>
+      <div>
+        <strong>§ 1983 Civil Rights Attorneys</strong>
+        <span>Plaintiff counsel taking on sheriffs, jails, and county governments in federal court</span>
+      </div>
+    </div>
+    <div class="client-row">
+      <div class="client-icon">→</div>
+      <div>
+        <strong>Wrongful Death Counsel</strong>
+        <span>In-custody death cases where the family deserves the full picture the county won't provide</span>
+      </div>
+    </div>
+    <div class="client-row">
+      <div class="client-icon">→</div>
+      <div>
+        <strong>First Amendment Lawyers</strong>
+        <span>Press retaliation, public meeting removal, viewpoint discrimination — I've documented it firsthand</span>
+      </div>
+    </div>
+    <div class="client-row">
+      <div class="client-icon">→</div>
+      <div>
+        <strong>Jail Conditions Litigation</strong>
+        <span>Medical neglect, ADA violations, overcrowding, staffing failures — inspection records and grievance logs obtained and analyzed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-box">
+    <h2>Start with a conversation.</h2>
+    <p>Describe the case and the defendant. Initial consultation is free. If the research fits what you need, we discuss scope and rate from there.</p>
+    <div class="contact-email-label">Email</div>
+    <div class="contact-email" id="email-addr">jasonstanl3y@gmail.com</div>
+    <br>
+    <button class="copy-btn" id="copy-btn">Copy Email</button>
+  </div>
+</section>
+
+<footer>
+  <span>Stanley Research Group · Idaho</span>
+  <span>OSINT · Public Records · Government Accountability</span>
+</footer>
+
+<script>
+  document.getElementById('copy-btn').addEventListener('click', function() {
+    var btn = this;
+    navigator.clipboard.writeText('jasonstanl3y@gmail.com').then(function() {
+      btn.textContent = 'Copied';
+      setTimeout(function() { btn.textContent = 'Copy Email'; }, 2000);
+    }).catch(function() {
+      var r = document.createRange();
+      r.selectNode(document.getElementById('email-addr'));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(r);
+    });
+  });
+</script>
+
+</body>
+</html>
