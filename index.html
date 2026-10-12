@@ -181,6 +181,29 @@
     .chapter-items { display:flex; flex-direction:column; gap:4px; }
     .chapter-items span { font-family:var(--mono); font-size:11px; color:var(--fg); padding-left:18px; position:relative; line-height:1.6; }
     .chapter-items span::before { content:'—'; position:absolute; left:0; color:var(--accent); }
+    /* INQUIRY FORM */
+    .inq-form { display:flex; flex-direction:column; gap:16px; }
+    .inq-group { display:flex; flex-direction:column; gap:5px; }
+    .inq-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .inq-label { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+    .inq-input { background:var(--surface2); border:1px solid var(--border2); color:var(--fg); font-family:var(--mono); font-size:12px; padding:9px 12px; width:100%; transition:border-color 0.15s; }
+    .inq-input::placeholder { color:var(--muted); }
+    .inq-input:focus { outline:none; border-color:var(--accent); }
+    textarea.inq-input { resize:vertical; min-height:72px; }
+    .case-chips { display:flex; flex-wrap:wrap; gap:6px; }
+    .chip { font-family:var(--mono); font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:5px 10px; border:1px solid var(--border2); background:none; color:var(--muted); cursor:pointer; transition:all 0.15s; }
+    .chip.on { color:var(--accent); border-color:var(--accent); background:rgba(212,168,67,0.07); }
+    .inq-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .inq-submit { flex:1; font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:11px 16px; background:var(--accent); color:#000; border:none; cursor:pointer; transition:opacity 0.15s; white-space:nowrap; }
+    .inq-submit:hover { opacity:0.85; }
+    .inq-copy-msg { font-family:var(--mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:11px 16px; border:1px solid var(--border2); background:none; color:var(--muted); cursor:pointer; transition:all 0.15s; white-space:nowrap; }
+    .inq-copy-msg:hover { color:var(--fg); border-color:var(--fg2); }
+    .inq-copy-msg.copied { color:var(--green); border-color:var(--green); }
+    .inq-direct { font-family:var(--mono); font-size:10px; color:var(--muted); display:flex; align-items:center; gap:8px; flex-wrap:wrap; border-top:1px solid var(--border); padding-top:14px; }
+    .inq-email { color:var(--accent); user-select:all; }
+    .inq-copy-email { font-family:var(--mono); font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border:1px solid var(--border2); background:none; color:var(--muted); cursor:pointer; transition:all 0.15s; }
+    .inq-copy-email:hover { color:var(--accent); border-color:var(--accent); }
+    .inq-copy-email.copied { color:var(--green); border-color:var(--green); }
     /* FOOTER */
     footer { border-top:1px solid var(--border); padding:20px 40px; max-width:960px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
     footer span { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:1px; }
@@ -194,6 +217,7 @@
       footer { padding-inline:16px; }
       .chapter-num { min-width:48px; font-size:28px; padding:18px 12px; }
       .chapter-content { padding:18px 16px; }
+      .inq-row { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -515,18 +539,46 @@
   <div class="contact-box">
     <div class="contact-left">
       <h2>Start with what you have.</h2>
-      <p>Tell me the defendant and the claim. Initial consultation is free. If the research fits what you need, we discuss scope and rate from there. No retainer to start a conversation.</p>
+      <p>Fill in the case type, defendant, and what you need. Hit send — it opens straight in your email client. Initial consultation is free. No retainer to start a conversation.</p>
     </div>
     <div class="contact-right">
-      <div class="contact-field">
-        <label>Email</label>
-        <div class="contact-value" id="email-addr">jasonstanl3y@gmail.com</div>
-        <button class="copy-btn" id="copy-btn">Copy Email Address</button>
-      </div>
-      <div class="contact-note">
-        Idaho-based. Available for cases throughout the state and Pacific Northwest.<br>
-        Response within 24 hours on business days. Initial dossier typically 3–5 days.<br>
-        No retainer to start a conversation — tell me the defendant and the claim.
+      <div class="inq-form">
+        <div class="inq-group">
+          <span class="inq-label">Case Type</span>
+          <div class="case-chips">
+            <button type="button" class="chip" data-val="§ 1983">§ 1983</button>
+            <button type="button" class="chip" data-val="Wrongful Death">Wrongful Death</button>
+            <button type="button" class="chip" data-val="Jail Conditions">Jail Conditions</button>
+            <button type="button" class="chip" data-val="First Amendment">First Amendment</button>
+            <button type="button" class="chip" data-val="Other">Other</button>
+          </div>
+        </div>
+        <div class="inq-group">
+          <label class="inq-label" for="inq-def">Defendant / Agency</label>
+          <input class="inq-input" id="inq-def" type="text" placeholder="Sheriff, county, jail, official...">
+        </div>
+        <div class="inq-row">
+          <div class="inq-group">
+            <label class="inq-label" for="inq-name">Your Name</label>
+            <input class="inq-input" id="inq-name" type="text" placeholder="Attorney name">
+          </div>
+          <div class="inq-group">
+            <label class="inq-label" for="inq-firm">Firm</label>
+            <input class="inq-input" id="inq-firm" type="text" placeholder="Law firm">
+          </div>
+        </div>
+        <div class="inq-group">
+          <label class="inq-label" for="inq-desc">What You Need</label>
+          <textarea class="inq-input" id="inq-desc" placeholder="Defendant background, specific records, pattern research — brief description"></textarea>
+        </div>
+        <div class="inq-actions">
+          <button class="inq-submit" id="inq-open">Open in Email Client →</button>
+          <button class="inq-copy-msg" id="inq-copy">Copy Message</button>
+        </div>
+        <div class="inq-direct">
+          Direct: <span class="inq-email" id="inq-direct-email">jasonstanl3y@gmail.com</span>
+          <button class="inq-copy-email" id="inq-copy-email">Copy</button>
+        </div>
       </div>
     </div>
   </div>
@@ -538,14 +590,59 @@
 </footer>
 
 <script>
-  document.getElementById('copy-btn').addEventListener('click', function() {
+  // Case type chips
+  document.querySelectorAll('.chip').forEach(function(chip) {
+    chip.addEventListener('click', function() { this.classList.toggle('on'); });
+  });
+
+  function buildInquiry() {
+    var name = (document.getElementById('inq-name').value || '').trim();
+    var firm = (document.getElementById('inq-firm').value || '').trim();
+    var def  = (document.getElementById('inq-def').value  || '').trim();
+    var desc = (document.getElementById('inq-desc').value || '').trim();
+    var types = Array.from(document.querySelectorAll('.chip.on')).map(function(c){ return c.dataset.val; }).join(', ');
+    var subj = 'Case Inquiry' + (types ? ' — ' + types : def ? ' — ' + def : '');
+    var lines = [];
+    if (name)  lines.push('Name: ' + name);
+    if (firm)  lines.push('Firm: ' + firm);
+    if (types) lines.push('Case type: ' + types);
+    if (def)   lines.push('Defendant/Agency: ' + def);
+    if (lines.length && desc) lines.push('');
+    if (desc)  lines.push(desc);
+    return { subj: subj, body: lines.join('\n') };
+  }
+
+  document.getElementById('inq-open').addEventListener('click', function() {
+    var d = buildInquiry();
+    window.location.href = 'mailto:jasonstanl3y@gmail.com?subject=' + encodeURIComponent(d.subj) + '&body=' + encodeURIComponent(d.body);
+  });
+
+  document.getElementById('inq-copy').addEventListener('click', function() {
+    var d = buildInquiry();
+    var btn = this;
+    var text = 'To: jasonstanl3y@gmail.com\nSubject: ' + d.subj + (d.body ? '\n\n' + d.body : '');
+    navigator.clipboard.writeText(text).then(function() {
+      btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent = 'Copy Message'; btn.classList.remove('copied'); }, 2000);
+    }).catch(function() {
+      var t = document.createElement('textarea');
+      t.value = text; t.style.cssText = 'position:fixed;top:-9999px';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); } catch(e) {}
+      document.body.removeChild(t);
+      btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent = 'Copy Message'; btn.classList.remove('copied'); }, 2000);
+    });
+  });
+
+  document.getElementById('inq-copy-email').addEventListener('click', function() {
     var btn = this;
     navigator.clipboard.writeText('jasonstanl3y@gmail.com').then(function() {
-      btn.textContent = 'Copied';
-      setTimeout(function() { btn.textContent = 'Copy Email Address'; }, 2000);
+      btn.textContent = 'Copied'; btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
     }).catch(function() {
       var r = document.createRange();
-      r.selectNode(document.getElementById('email-addr'));
+      r.selectNode(document.getElementById('inq-direct-email'));
       window.getSelection().removeAllRanges();
       window.getSelection().addRange(r);
     });
