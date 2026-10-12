@@ -90,6 +90,10 @@
     .btn-primary:hover { opacity:0.85; }
     .btn-ghost { font-family:var(--mono); font-size:11px; letter-spacing:1px; color:var(--fg2); text-decoration:none; border-bottom:1px solid var(--border2); padding-bottom:2px; transition:color 0.15s,border-color 0.15s; }
     .btn-ghost:hover { color:var(--fg); border-color:var(--fg); }
+    /* HERO CREDENTIALS */
+    .hero-creds { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+    .hero-cred { font-family:var(--mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--fg2); }
+    .hero-cred-dot { color:var(--border2); font-size:12px; }
     /* STAT BAR */
     .stat-bar { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
     .stat-cell { background:var(--surface); padding:28px 32px; }
@@ -239,6 +243,15 @@
   <div class="hero-eyebrow">Investigative Research for Plaintiff Counsel</div>
   <h1>They hid it.<br><em>We found it.</em></h1>
   <p class="hero-deck">OSINT research, public records, and civil docket analysis for attorneys fighting sheriffs, jails, and county governments. We find what defendants document and then bury.</p>
+  <div class="hero-creds">
+    <span class="hero-cred">U.S. Army Veteran</span>
+    <span class="hero-cred-dot">·</span>
+    <span class="hero-cred">U.S. Press Association #802085569</span>
+    <span class="hero-cred-dot">·</span>
+    <span class="hero-cred">1 Year Active KCSO Investigation</span>
+    <span class="hero-cred-dot">·</span>
+    <span class="hero-cred">200+ Primary Source Documents</span>
+  </div>
   <div class="hero-actions">
     <a class="btn-primary" href="#contact">Discuss Your Case</a>
     <a class="btn-ghost" href="#work">See active investigation ↓</a>
