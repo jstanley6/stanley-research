@@ -589,7 +589,7 @@
           <button class="inq-copy-msg" id="inq-copy">Copy Message</button>
         </div>
         <div class="inq-direct">
-          Direct: <span class="inq-email" id="inq-direct-email">jasonstanl3y@gmail.com</span>
+          Direct: <span class="inq-email" id="inq-direct-email">jasonstanleyweb@outlook.com</span>
           <button class="inq-copy-email" id="inq-copy-email">Copy</button>
         </div>
       </div>
@@ -627,13 +627,13 @@
 
   document.getElementById('inq-open').addEventListener('click', function() {
     var d = buildInquiry();
-    window.location.href = 'mailto:jasonstanl3y@gmail.com?subject=' + encodeURIComponent(d.subj) + '&body=' + encodeURIComponent(d.body);
+    window.location.href = 'mailto:jasonstanleyweb@outlook.com?subject=' + encodeURIComponent(d.subj) + '&body=' + encodeURIComponent(d.body);
   });
 
   document.getElementById('inq-copy').addEventListener('click', function() {
     var d = buildInquiry();
     var btn = this;
-    var text = 'To: jasonstanl3y@gmail.com\nSubject: ' + d.subj + (d.body ? '\n\n' + d.body : '');
+    var text = 'To: jasonstanleyweb@outlook.com\nSubject: ' + d.subj + (d.body ? '\n\n' + d.body : '');
     navigator.clipboard.writeText(text).then(function() {
       btn.textContent = 'Copied ✓'; btn.classList.add('copied');
       setTimeout(function(){ btn.textContent = 'Copy Message'; btn.classList.remove('copied'); }, 2000);
@@ -650,7 +650,7 @@
 
   document.getElementById('inq-copy-email').addEventListener('click', function() {
     var btn = this;
-    navigator.clipboard.writeText('jasonstanl3y@gmail.com').then(function() {
+    navigator.clipboard.writeText('jasonstanleyweb@outlook.com').then(function() {
       btn.textContent = 'Copied'; btn.classList.add('copied');
       setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
     }).catch(function() {
